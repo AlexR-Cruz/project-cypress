@@ -9,9 +9,31 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+
+    # Subindo o container oficial do PostgreSQL no GitHub Actions
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: qa_user
+          POSTGRES_PASSWORD: qa_passwordAa123
+          POSTGRES_DB: qa_database
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout do Código
         uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Executar Testes Cypress
         uses: cypress-io/github-action@v6
