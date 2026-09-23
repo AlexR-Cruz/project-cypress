@@ -1,0 +1,22 @@
+name: Cypress E2E Tests
+
+# Define quando os testes vão rodar automaticamente
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Baixa o código do seu repositório para o servidor do GitHub
+      - name: Checkout do Código
+        uses: actions/checkout@v4
+
+      # 2. Instala dependências e roda os testes do Cypress em modo Headless
+      - name: Execução dos Testes Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          record: false
