@@ -15,3 +15,5 @@ jobs:
 
       - name: Executar Testes Cypress
         uses: cypress-io/github-action@v6
+        with:
+          working-directory: project-cypress
