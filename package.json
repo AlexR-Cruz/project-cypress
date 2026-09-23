@@ -1,0 +1,12 @@
+{
+  "name": "project-cypress",
+  "version": "1.0.0",
+  "description": "Projeto de automacao com Cypress e POM",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^13.0.0"
+  }
+}
