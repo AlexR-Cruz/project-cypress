@@ -53,8 +53,8 @@ class ProductsPage {
     })
   }
 
-  addFirstProductToCart() {
-    this.elements.addToCartBtn(0).click()
+  addProductToCart(index = 0) {
+    this.elements.addToCartBtn(index).click()
   }
 
   addMultipleProductsToCart(count) {

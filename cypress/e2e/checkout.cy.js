@@ -8,7 +8,7 @@ describe('Módulo de Checkout', () => {
 
   it('Deve concluir uma compra com sucesso', () => {
     // 1. Adiciona item ao carrinho
-    productsPage.addBackpackToCart()
+    productsPage.addProductToCart()
     checkoutPage.elements.cartButton().click()
 
     // 2. Inicia o checkout
@@ -25,7 +25,7 @@ describe('Módulo de Checkout', () => {
   })
 
   it('Deve exibir mensagem de erro ao tentar avançar no checkout sem preencher os dados', () => {
-    productsPage.addBackpackToCart()
+    productsPage.addProductToCart()
     checkoutPage.elements.cartButton().click()
     checkoutPage.elements.checkoutButton().click()
 

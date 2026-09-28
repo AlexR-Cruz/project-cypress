@@ -38,7 +38,7 @@ describe('Módulo de Catálogo / Produtos', () => {
   it('Deve exibir o ícone com número 1 no carringo ao adicionar o primeiro produto', () => {
     productsPage.elements.cartBadge().should('not.exist')
 
-    productsPage.addFirstProductToCart()
+    productsPage.addProductToCart()
 
     productsPage.elements.cartBadge()
     .should('be.visible')
