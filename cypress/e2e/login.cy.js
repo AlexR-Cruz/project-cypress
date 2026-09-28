@@ -1,28 +1,42 @@
 import LoginPage from '../support/pages/LoginPage'
 
 describe('Módulo de Autenticação', () => {
+  let user // Variável para armazenar os dados do fixture
+
   beforeEach(() => {
+    // Carrega a massa de dados do ficheiro cypress/fixtures/users.json
+    cy.fixture('users').then((data) => {
+      user = data
+    })
+    
     LoginPage.visit()
   })
 
   it('Deve realizar login com sucesso', () => {
-    LoginPage.login('standard_user', 'secret_sauce')
-
+    LoginPage.login(user.usuarioValido.username, user.usuarioValido.password)
 
     cy.url().should('include', '/inventory.html')
     cy.get('.title').should('have.text', 'Products')
   })
 
   it('Deve exibir mensagem de erro ao inserir credenciais inválidas', () => {
-    LoginPage.login('usuário_inválido', 'senha inválida')
+    LoginPage.login(user.usuarioInvalido.username, user.usuarioInvalido.password)
 
     LoginPage.elements.errorMessage()
       .should('be.visible')
       .and('contain', 'Username and password do not match')
   })
 
+  it('Deve exibir mensagem de erro ao inserir somente o username nas credenciais', () => {
+    LoginPage.login(user.usuarioValido.username,'')
+
+    LoginPage.elements.errorMessage()
+    .should('be.visible')
+    .and('contain', 'Password is required')
+  })
+
   it('Deve impedir o acesso de um utilizador bloqueado', () => {
-    LoginPage.login('locked_out_user', 'secret_sauce')
+    LoginPage.login(user.usuarioBloqueado.username, user.usuarioBloqueado.password)
 
     cy.get('[data-test="error"]')
       .should('be.visible')

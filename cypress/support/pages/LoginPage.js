@@ -13,25 +13,31 @@ class LoginPage {
   }
 
   fillUsername(username) {
-    this.elements.usernameInput().type(username)
+    if (username) {
+      this.elements.usernameInput().clear().type(username)
+    } else {
+      this.elements.usernameInput().clear()
+    }
   }
 
   fillPassword(password) {
-    this.elements.passwordInput().type(password)
+    if (password) {
+      this.elements.passwordInput().clear().type(password)
+    } else {
+      this.elements.passwordInput().clear() // Apenas limpa o campo, sem dar .type()
+    }
   }
 
-  submit() {
-    this.elements.loginButton().click()
-  }
-
-  // Método auxiliar para realizar um login completo em uma única chamada
   login(username, password) {
     this.fillUsername(username)
     this.fillPassword(password)
     this.submit()
   }
+
+  submit() {
+    this.elements.loginButton().click()
+  }
 }
 
-// Exportamos a instância já criada da classe
 export default new LoginPage()
 
