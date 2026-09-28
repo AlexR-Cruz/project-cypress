@@ -20,4 +20,12 @@ describe('Módulo de Autenticação', () => {
       .should('be.visible')
       .and('contain', 'Username and password do not match')
   })
+
+  it('Deve impedir o acesso de um utilizador bloqueado', () => {
+    LoginPage.login('locked_out_user', 'secret_sauce')
+
+    cy.get('[data-test="error"]')
+      .should('be.visible')
+      .and('contain', 'Epic sadface: Sorry, this user has been locked out.')
+  })
 })

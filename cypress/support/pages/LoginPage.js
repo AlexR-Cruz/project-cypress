@@ -34,3 +34,4 @@ class LoginPage {
 
 // Exportamos a instância já criada da classe
 export default new LoginPage()
+

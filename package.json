@@ -4,7 +4,8 @@
   "description": "Projeto de automacao com Cypress e POM",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run"
+    "test": "cypress run",
+    "test:ui": "ELECTRON_DISABLE_GPU=1 cypress open --e2e --browser electron"
   },
   "devDependencies": {
     "cypress": "^13.0.0",

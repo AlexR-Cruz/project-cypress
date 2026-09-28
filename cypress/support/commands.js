@@ -1,18 +1,12 @@
 // cypress/support/commands.js
 
-Cypress.Commands.add('loginViaApi', (username, password) => {
-  cy.request({
-    method: 'POST',
-    url: 'https://restful-booker.herokuapp.com/auth',
-    body: {
-      username: username,
-      password: password
-    }
-  }).then((response) => {
-    // Garante que a API respondeu com sucesso (HTTP 200)
-    expect(response.status).to.eq(200)
-    
-    // Salva o token gerado em um Cookie no navegador
-    cy.setCookie('token', response.body.token)
-  })
+Cypress.Commands.add('loginViaApi', (username = 'standard_user') => {
+  // 1. Visita a página principal para estabelecer a origem/domínio
+  cy.visit('https://www.saucedemo.com/')
+  
+  // 2. Injeta o cookie que o SauceDemo utiliza para manter a sessão ativa
+  cy.setCookie('session-username', username)
+  
+  // 3. Visita a página interna após ter o cookie injetado
+  cy.visit('https://www.saucedemo.com/inventory.html', { failOnStatusCode: false })
 })

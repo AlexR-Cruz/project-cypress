@@ -5,25 +5,18 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       on('task', {
-        queryDb(queryText) {
+        async queryDb(query) {
           const client = new Client({
-            host: process.env.DB_HOST || 'localhost',
-            port: 5432,
-            user: 'qa_user',
-            password: 'qa_passwordAa123',
-            database: 'qa_database'
+            connectionString: 'postgresql://neondb_owner:npg_cDxRI7ET4yGJ@ep-late-thunder-b6vgbqfx-pooler.c-2.sa-east-1.aws.neon.tech/neondb?sslmode=require',
+            ssl: {
+              rejectUnauthorized: false // Necessário para aceitar o certificado SSL da nuvem
+            }
           })
 
-          return client.connect()
-            .then(() => client.query(queryText))
-            .then((res) => {
-              client.end()
-              return res.rows || res // Retorna as linhas consultadas
-            })
-            .catch((err) => {
-              client.end()
-              throw err
-            })
+          await client.connect()
+          const res = await client.query(query)
+          await client.end()
+          return res.rows
         }
       })
     }
