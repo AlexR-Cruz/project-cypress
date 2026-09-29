@@ -11,7 +11,6 @@ class ProductsPage {
     removeBackpackBtn: () => cy.get('[data-test="remove-sauce-labs-backpack"]'),
   }
 
-  // Ações da página
   validatePageLoaded() {
     this.elements.title().should('have.text', 'Products')
     this.elements.inventoryItems().should('have.length.at.least', 1)
@@ -22,19 +21,15 @@ class ProductsPage {
   }
 
   validateNameOrdering(direction = 'asc') {
-    // Captura os nomes de todos os produtos exibidos na tela
     this.elements.inventoryItemNames().then(($elements) => {
-      // Extrai o texto de cada elemento HTML
       const displayedNames = Cypress._.map($elements, 'innerText')
 
-      // Cria uma cópia da lista e ordena via JavaScript
       const sortedNames = [...displayedNames].sort((a, b) => {
         return direction === 'asc'
         ? a.localeCompare(b)
         : b.localeCompare(a)
       })
 
-      // Valida se a lista da tela é exatamente igual à lista ordenada
       expect(displayedNames).to.deep.equal(sortedNames)
     })
   }

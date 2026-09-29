@@ -1,7 +1,6 @@
 describe('Módulo de Validação com Banco de Dados PostgreSQL Real', () => {
 
   before(() => {
-    // 1. Cria a tabela 'users' se não existir no banco do GitHub Actions
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -11,7 +10,6 @@ describe('Módulo de Validação com Banco de Dados PostgreSQL Real', () => {
     `
     cy.task('queryDb', createTableQuery)
 
-    // 2. Insere um registro de teste
     const insertQuery = `
       INSERT INTO users (name, email)
       VALUES ('Alex Cruz', 'alex@exemplo.com');

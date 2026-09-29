@@ -7,18 +7,16 @@ describe('Módulo de Checkout', () => {
   })
 
   it('Deve concluir uma compra com sucesso', () => {
-    // 1. Adiciona item ao carrinho
     productsPage.addProductToCart()
     checkoutPage.elements.cartButton().click()
 
-    // 2. Inicia o checkout
+
     checkoutPage.elements.checkoutButton().click()
 
-    // 3. Preenche formulário de envio e finaliza
     checkoutPage.fillCustomerInfo('Alex', 'Cruz', '12345')
     checkoutPage.finishOrder()
 
-    // 4. Valida mensagem de sucesso
+
     checkoutPage.elements.completeHeader()
       .should('be.visible')
       .and('have.text', 'Thank you for your order!')
@@ -29,10 +27,10 @@ describe('Módulo de Checkout', () => {
     checkoutPage.elements.cartButton().click()
     checkoutPage.elements.checkoutButton().click()
 
-    // Clica em continuar sem preencher nada
+
     checkoutPage.elements.continueButton().click()
 
-    // Valida a mensagem de erro do formulário
+
     cy.get('[data-test="error"]')
       .should('be.visible')
       .and('contain', 'Error: First Name is required')

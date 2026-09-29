@@ -1,10 +1,9 @@
 import LoginPage from '../support/pages/LoginPage'
 
 describe('Módulo de Autenticação', () => {
-  let user // Variável para armazenar os dados do fixture
+  let user 
 
   beforeEach(() => {
-    // Carrega a massa de dados do ficheiro cypress/fixtures/users.json
     cy.fixture('users').then((data) => {
       user = data
     })

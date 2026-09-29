@@ -1,5 +1,4 @@
 class LoginPage {
-  // 1. Mapeamento de Seletores (Membros/Propriedades da classe)
   elements = {
     usernameInput: () => cy.get('[data-test="username"]'),
     passwordInput: () => cy.get('[data-test="password"]'),
@@ -7,7 +6,6 @@ class LoginPage {
     errorMessage: () => cy.get('[data-test="error"]')
   }
 
-  // 2. Ações que o usuário realiza nessa página (Métodos)
   visit() {
     cy.visit('https://www.saucedemo.com/')
   }

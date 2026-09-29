@@ -2,7 +2,6 @@ import productsPage from '../support/pages/ProductsPage'
 
 describe('Módulo de Catálogo / Produtos', () => {
   beforeEach(() => {
-    // Realiza a autenticação rápida via cookie e acessa o catálogo
     cy.loginViaApi('standard_user')
   })
 
@@ -52,7 +51,4 @@ describe('Módulo de Catálogo / Produtos', () => {
     .should('be.visible')
     .and('have.text', '3')
   })
-
-  
-  // ... restantes testes
 })
